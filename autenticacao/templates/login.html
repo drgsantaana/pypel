@@ -1,0 +1,97 @@
+{% extends 'index.html' %} {% block conteudo %}
+<div class="container">
+    <h2>Login</h2>
+    <form method="POST" action="{% url 'autenticacao:login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="txtEmail">E-mail</label>
+            <input type="email" class="form-control" id="txtEmail" name="txtEmail" required autocomplete="off" />
+            <div id="divEmailError" class="error-message"></div>
+        </div>
+        <div class="form-group hidden-group" id="divSenha">
+            <label for="txtSenha">Senha</label>
+            <input
+                type="password"
+                class="form-control"
+                id="txtSenha"
+                name="txtSenha"
+                required
+                autocomplete="new-password"
+            />
+        </div>
+        <div class="form-group hidden-group" id="divPerfil">
+            <label for="perfil">Perfil</label>
+            <select class="form-control" id="slcPerfil" name="slcPerfil" required></select>
+        </div>
+        <div id="divSpace" class="space"></div>
+        <button type="submit" class="btn btn-light">Entrar</button><br />
+        <a id="btnEsqueciSenha" class="btn btn-light" style="margin-top: 10px">Esqueci minha senha</a>
+    </form>
+</div>
+
+<div
+    class="modal fade"
+    id="modalSenha"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalSenhaLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalSenhaLabel">Recuperar Senha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <form id="formRecuperarSenha" method="post" action="{% url 'autenticacao:recuperar-senha' %}">
+                    {% csrf_token %}
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required />
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#formRecuperarSenha').on('submit', function (event) {
+            event.stopPropagation(); // Impede que o evento "submit" propague para outros elementos.
+        });
+
+        $('#txtEmail').on('input', function () {
+            var email = $(this).val();
+            $('#divPerfil').addClass('hidden-group');
+            $('#divSenha').addClass('hidden-group');
+            $('#slcPerfil').empty();
+            $('#divEmailError').text(' ').removeClass('visible');
+
+            if (email.length > 0) {
+                $.ajax({
+                    url: "{% url 'autenticacao:get_perfis' %}",
+                    data: { email: email },
+                    success: function (data) {
+                        $('#slcPerfil').empty();
+                        data.perfis.forEach(function (perfil) {
+                            $('#slcPerfil').append(new Option(perfil.nome, perfil.id));
+                        });
+                        $('#divPerfil').removeClass('hidden-group');
+                        $('#divSenha').removeClass('hidden-group');
+                        $('#divEsqueceuSenha').removeClass('hidden-group');
+
+                        $('#divEmailError').text('.').addClass('visible');
+                    },
+                });
+            }
+        });
+    });
+
+    $('#btnEsqueciSenha').click(function () {
+        $('#modalSenha').modal('show');
+    });
+</script>
+{% endblock %}

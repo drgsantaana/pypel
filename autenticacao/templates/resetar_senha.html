@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block conteudo%}
+
+<h2>Redefinir Senha</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="token" value="{{ token }}">
+        <label for="senha">Nova Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+        <button type="submit">Alterar Senha</button>
+    </form>
+
+{% endblock %}

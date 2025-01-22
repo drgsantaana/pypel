@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block conteudo%}
+
+<h2>Criar Usuário</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Exibe o formulário em formato de parágrafos -->
+    <button type="submit">Criar Usuário</button>
+  </form>
+  
+{% endblock %}

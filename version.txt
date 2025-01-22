@@ -1,0 +1,29 @@
+PYPEL - SISTEMA DE GERENCIAMENTO DE PAPELARIA
+VERSAO 0.01 - sistema de autenticacao concluido - 22/01/2025
+
+https://github.com/drgsantaana/pypel
+Daniel Reis Goncalves Santana
+drgsantaana@gmail.com
+
+1. ABNT 
+SANTANA, Daniel R. G. PYPEL - Sistema de Grenciamento de Papelaria.
+[S.l.] : [s.n.], 2025. Disponivel em: https://github.com/drgsantaana/pypel
+Acesso em: [data de acesso]
+
+2. IEEE
+D. R. G. SANTANA, "PYPEL - Sistema de Grenciamento de Papelaria." [online].
+Disponivel em: https://github.com/drgsantaana/pypel
+[Acesso em: dia, mes, ano]
+
+3. APA
+Santana, D. R. G. (2025). PYPEL - Sistema de Grenciamento de Papelaria.
+Acesso em: [data de acesso], de https://github.com/drgsantaana/pypel
+
+4. BibTex
+@misc{santana2025pypel,
+    author = {Santana, Daniel Reis Goncalves},
+    title = {PYPEL - Sistema de Grenciamento de Papelaria},
+    year = {2025},
+    howpublished = {\url{https://github.com/drgsantaana/pypel}},
+    note = {Acessado em: data de acesso}
+}
